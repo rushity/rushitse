@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rushit's Search Engine</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Rushit's Search Engine</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <input type="text" name="query" placeholder="Ask anything..." required>
+            <button type="submit">Search</button>
+        </form>
+        <section class="results">
+            {% if results %}
+                {% for result in results %}
+                    <div class="result">
+                        <h2><a href="{{ result.link }}" target="_blank">{{ result.title }}</a></h2>
+                        <p>{{ result.content_preview }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% if request.method == "POST" %}
+                    <p>No results found. Try another query.</p>
+                {% endif %}
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
